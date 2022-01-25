@@ -7,6 +7,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+var name = "testUser1"
+var meta = "Test Api Function"
+
 func TestListAllServiceTokens(t *testing.T) {
 	ret, err := l.ListAllServiceTokens()
 	assert.Nil(t, err)
