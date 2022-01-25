@@ -268,7 +268,7 @@ type Balance struct {
 	Amount   string `json:"amount"`
 }
 
-func (l LBD) RetrieveBaseCoinBalance(userId string) (*Balance, error) {
+func (l LBD) RetrieveBaseCoinBalanceUserWallet(userId string) (*Balance, error) {
 	r := NewGetRequest(fmt.Sprintf("/v1/users/%s/base-coin", userId))
 	resp, err := l.Do(r, true)
 	if err != nil {
@@ -288,7 +288,7 @@ type BalanceOfServiceTokens struct {
 	Amount     string `json:"amount"`
 }
 
-func (l LBD) RetrieveBalanceOfAllServiceTokens(userId string) ([]*BalanceOfServiceTokens, error) {
+func (l LBD) RetrieveBalanceOfAllServiceTokensUserWallet(userId string) ([]*BalanceOfServiceTokens, error) {
 	path := fmt.Sprintf("/v1/users/%s/service-tokens", userId)
 
 	all := []*BalanceOfServiceTokens{}
@@ -315,7 +315,7 @@ func (l LBD) RetrieveBalanceOfAllServiceTokens(userId string) ([]*BalanceOfServi
 	return all, nil
 }
 
-func (l LBD) RetrieveBalanceOfSpecificServiceToken(userId, contractId string) (*BalanceOfServiceTokens, error) {
+func (l LBD) RetrieveBalanceOfSpecificServiceTokenUserWallet(userId, contractId string) (*BalanceOfServiceTokens, error) {
 	r := NewGetRequest(fmt.Sprintf("/v1/users/%s/service-tokens/%s", userId, contractId))
 	resp, err := l.Do(r, true)
 	if err != nil {
@@ -334,7 +334,7 @@ type BalanceOfFungible struct {
 	Amount    string `json:"amount"`
 }
 
-func (l LBD) RetrieveBalanceOfAllFungibles(userId, contractId string) ([]*BalanceOfFungible, error) {
+func (l LBD) RetrieveBalanceOfAllFungiblesUserWallet(userId, contractId string) ([]*BalanceOfFungible, error) {
 	path := fmt.Sprintf("/v1/users/%s/item-tokens/%s/fungibles", userId, contractId)
 
 	all := []*BalanceOfFungible{}
@@ -361,7 +361,7 @@ func (l LBD) RetrieveBalanceOfAllFungibles(userId, contractId string) ([]*Balanc
 	return all, nil
 }
 
-func (l LBD) RetrieveBalanceOfSpecificFungible(userId, contractId, tokenType string) (*BalanceOfFungible, error) {
+func (l LBD) RetrieveBalanceOfSpecificFungibleUserWallet(userId, contractId, tokenType string) (*BalanceOfFungible, error) {
 	r := NewGetRequest(fmt.Sprintf("/v1/users/%s/item-tokens/%s/fungibles/%s", userId, contractId, tokenType))
 	resp, err := l.Do(r, true)
 	if err != nil {
@@ -400,7 +400,7 @@ type BalanceOfNonFungiblesToken struct {
 	BurnedAt  int64  `json:"burnedAt"`
 }
 
-func (l LBD) RetrieveBalanceOfNonFungiblesWithTokenType(userId, contractId, orderBy, pageToken string, limit uint32) (*BalanceOfNonFungiblesTokenType, error) {
+func (l LBD) RetrieveBalanceOfNonFungiblesWithTokenTypeUserWallet(userId, contractId, orderBy, pageToken string, limit uint32) (*BalanceOfNonFungiblesTokenType, error) {
 	var r *Request
 	if pageToken == "" {
 		r = NewGetRequest(fmt.Sprintf("/v1/users/%s/item-tokens/%s/non-fungibles/with-type?limit=%d&orderBy=%s", userId, contractId, limit, orderBy))
@@ -422,7 +422,7 @@ type BalanceOfSpecificNonFungible struct {
 	Meta       string `json:"meta"`
 }
 
-func (l LBD) RetrieveBalanceOfSpecificNonFungible(userId, contractId, tokenType, tokenIndex string) (*BalanceOfSpecificNonFungible, error) {
+func (l LBD) RetrieveBalanceOfSpecificNonFungibleUserWallet(userId, contractId, tokenType, tokenIndex string) (*BalanceOfSpecificNonFungible, error) {
 	r := NewGetRequest(fmt.Sprintf("/v1/users/%s/item-tokens/%s/non-fungibles/%s/%s", userId, contractId, tokenType, tokenIndex))
 	resp, err := l.Do(r, true)
 	if err != nil {
@@ -524,7 +524,7 @@ func (r TransferDelegatedRequest) Encode() string {
 	return fmt.Sprintf("%s?amount=%s&ownerAddress=%s&ownerSecret=%s&toAddress=%s", base, r.Amount, r.OwnerAddress, r.OwnerSecret, r.ToAddress)
 }
 
-func (l LBD) TransferDelegatedServiceToken(userId, contractId, to string, amount *big.Int) (*Transfer, error) {
+func (l LBD) TransferDelegatedServiceTokenUserWallet(userId, contractId, to string, amount *big.Int) (*Transfer, error) {
 	path := fmt.Sprintf("/v1/users/%s/service-tokens/%s/transfer", userId, contractId)
 	r := TransferDelegatedRequest{
 		Request:      NewPostRequest(path),
@@ -547,7 +547,7 @@ func (l LBD) TransferDelegatedServiceToken(userId, contractId, to string, amount
 	return UnmarshalTransfer(resp.ResponseData)
 }
 
-func (l LBD) TransferDelegatedFungible(userId, contractId, tokenType, to string, amount *big.Int) (*Transfer, error) {
+func (l LBD) TransferDelegatedFungibleUserWallet(userId, contractId, tokenType, to string, amount *big.Int) (*Transfer, error) {
 	path := fmt.Sprintf("/v1/users/%s/item-tokens/%s/fungibles/%s/transfer", userId, contractId, tokenType)
 	r := TransferDelegatedRequest{
 		Request:      NewPostRequest(path),
@@ -633,7 +633,7 @@ func (r TransferDelegatedNonFungiblesRequest) Encode() string {
 	return fmt.Sprintf("%s?ownerAddress=%s&ownerSecret=%s&toAddress=%s&%s", base, r.OwnerAddress, r.OwnerSecret, r.ToAddress, transferList)
 }
 
-func (l LBD) BatchTransferDelegatedNonFungibles(userId, contractId, to string, transferList []TransferList) (*Transfer, error) {
+func (l LBD) BatchTransferDelegatedNonFungiblesUserWallet(userId, contractId, to string, transferList []TransferList) (*Transfer, error) {
 	path := fmt.Sprintf("/v1/users/%s/item-tokens/%s/non-fungibles/batch-transfer", userId, contractId)
 	r := &TransferDelegatedNonFungiblesRequest{
 		Request:      NewPostRequest(path),
