@@ -23,8 +23,27 @@ func TestRetrieveServiceTokenInformation(t *testing.T) {
 }
 
 func TestMintServiceToken(t *testing.T) {
-	onlyTxMode(t)
 	ret, err := l.MintServiceToken(serviceTokenContractId, toAddress, big.NewInt(1000))
 	assert.Nil(t, err)
 	t.Log(ret)
+}
+
+func TestUpdateServiceTokenInformation(t *testing.T) {
+	ret, err := l.UpdateServiceTokenInformation(serviceTokenContractId, name, meta)
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Log(ret)
+}
+
+func TestBurnServiceToken(t *testing.T) {
+	ret, err := l.BurnServiceToken(serviceTokenContractId, toAddress, big.NewInt(1))
+	assert.Nil(t, err)
+	t.Log(ret)
+}
+
+func TestListAllServiceTokenHolders(t *testing.T) {
+	ret, err := l.ListAllServiceTokenHolders(serviceTokenContractId)
+	assert.Nil(t, err)
+	t.Log(ret[0])
 }
