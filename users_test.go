@@ -60,56 +60,56 @@ func TestCommitTransaction(t *testing.T) {
 	t.Log(ret)
 }
 
-func TestRetrieveBaseCoinBalance(t *testing.T) {
-	ret, err := l.RetrieveBaseCoinBalance(userId)
+func TestRetrieveBaseCoinBalanceUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBaseCoinBalanceUserWallet(userId)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfAllServiceTokens(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfAllServiceTokens(userId)
+func TestRetrieveBalanceOfAllServiceTokensUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfAllServiceTokensUserWallet(userId)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfSpecificServiceToken(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfSpecificServiceToken(userId, serviceTokenContractId)
+func TestRetrieveBalanceOfSpecificServiceTokenUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfSpecificServiceTokenUserWallet(userId, serviceTokenContractId)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfAllFungibles(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfAllFungibles(userId, itemTokenContractId)
+func TestRetrieveBalanceOfAllFungiblesUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfAllFungiblesUserWallet(userId, itemTokenContractId)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfSpecificFungible(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfSpecificFungible(userId, itemTokenContractId, "00000001")
+func TestRetrieveBalanceOfSpecificFungibleUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfSpecificFungibleUserWallet(userId, itemTokenContractId, "00000001")
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfNonFungiblesWithTokenType(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfNonFungiblesWithTokenType(userId, itemTokenContractId, "asc", "", 10)
+func TestRetrieveBalanceOfNonFungiblesWithTokenTypeUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfNonFungiblesWithTokenTypeUserWallet(userId, itemTokenContractId, "asc", "", 10)
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestRetrieveBalanceOfSpecificNonFungible(t *testing.T) {
-	ret, err := l.RetrieveBalanceOfSpecificNonFungible(userId, itemTokenContractId, tokenType, "00000001")
+func TestRetrieveBalanceOfSpecificNonFungibleUserWallet(t *testing.T) {
+	ret, err := l.RetrieveBalanceOfSpecificNonFungibleUserWallet(userId, itemTokenContractId, tokenType, "00000001")
 	if err != nil {
 		t.Error(err)
 	}
@@ -150,16 +150,16 @@ func TestIssueSessionTokenForServiceTokenProxySetting(t *testing.T) {
 	t.Log(ret)
 }
 
-func TestTransferDelegatedServiceToken(t *testing.T) {
-	ret, err := l.TransferDelegatedServiceToken(userId, serviceTokenContractId, owner.Address, big.NewInt(1000))
+func TestTransferDelegatedServiceTokenUserWallet(t *testing.T) {
+	ret, err := l.TransferDelegatedServiceTokenUserWallet(userId, serviceTokenContractId, owner.Address, big.NewInt(1000))
 	if err != nil {
 		t.Error(err)
 	}
 	t.Log(ret)
 }
 
-func TestTransferDelegatedFungible(t *testing.T) {
-	ret, err := l.TransferDelegatedFungible(userId, itemTokenContractId, tokenType, owner.Address, big.NewInt(1000))
+func TestTransferDelegatedFungibleUserWallet(t *testing.T) {
+	ret, err := l.TransferDelegatedFungibleUserWallet(userId, itemTokenContractId, tokenType, owner.Address, big.NewInt(1000))
 	if err != nil {
 		t.Error(err)
 	}
@@ -174,8 +174,8 @@ func TestTransferDelegatedNonFungible(t *testing.T) {
 	t.Log(ret)
 }
 
-func TestBatchTransferDelegatedNonFungibles(t *testing.T) {
-	ret, err := l.BatchTransferDelegatedNonFungibles(userId, itemTokenContractId, owner.Address, []TransferList{{TokenId: tokenType + "00000001"}, {TokenId: tokenType + "00000002"}})
+func TestBatchTransferDelegatedNonFungiblesUserWallet(t *testing.T) {
+	ret, err := l.BatchTransferDelegatedNonFungiblesUserWallet(userId, itemTokenContractId, owner.Address, []TransferList{{TokenId: tokenType + "00000001"}, {TokenId: tokenType + "00000002"}})
 	if err != nil {
 		t.Error(err)
 	}
