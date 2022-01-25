@@ -7,8 +7,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var serviceTokenContractId = "d5e19f47"
-
 func TestListAllServiceTokens(t *testing.T) {
 	ret, err := l.ListAllServiceTokens()
 	assert.Nil(t, err)
