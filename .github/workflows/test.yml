@@ -1,0 +1,19 @@
+name: go-test
+on: 
+  - pull_request
+jobs:
+  # Setup（いるかは微妙なところ
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ^1.13
+        id: go
+  # Run
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: go test ./...
