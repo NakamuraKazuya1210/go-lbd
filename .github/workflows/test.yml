@@ -1,0 +1,29 @@
+name: go-test
+on: 
+  - pull_request
+env:
+  API_KEY: 9eed17a3-16f2-43b5-8ef9-38ee1e250139
+  API_SECRET: bbc75c17-b514-40af-b818-aa15aeb26f80
+  SERVICE_ID: 8535b466-05a1-4d55-8015-1e5c9c674a74
+  OWNER_ADDR: tlink1am8tpdn7z55adks7sdyus7cqpz8gftu4glrepg
+  OWNER_SECRET: MlrBO/MRLKJxaxX6rRtDK3iwxt31l7EQhOGDOqMirBA=
+  SERVICETOKEN_CONTRACT_ID: 4c3d8162
+  ITEMTOKEN_CONTRACT_ID: 1f3c3475
+  USER_ID: U69b8d49495102d6eb3148f7b37f2ba5b
+  TX: 1
+jobs:
+  # Setup
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ^1.13
+        id: go
+  # Run
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: go test ./...
